@@ -24,6 +24,10 @@ streamlit.dataframe(fruityvice_normalized)
 fruit_choice = streamlit.text_input('What fruit would you like information about?' ,'Kiwi')
 streamlit.write('The user entered', fruit_choice)
 
+streamlit.stop()
+add_fruit = streamlit.text_input('Which Fruit would you like to add?' ,'Kiwi')
+my_cur.execute("insert into fruit_load_list values (" + add_fruit + ")")
+
 import snowflake.connector
 
 my_cnx = snowflake.conector.connect(**streamlit.secrets["snowflake"])
@@ -33,6 +37,4 @@ my_data_row = my_cur.fetchone()
 streamlit.text("Hello from Snowflake:")
 streamlit.text(my_data_row)    
 
-streamlit.stop()
-add_fruit = streamlit.text_input('Which Fruit would you like to add?' ,'Kiwi')
-my_cur.execute("insert into fruit_load_list values (" + add_fruit + ")")
+
